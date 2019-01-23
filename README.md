@@ -12,7 +12,7 @@ RESTFULL API USAGE:
 
 1- The rest-api to search for any country and return its continent.
 
-http://localhost:8080/countries/Italy
+https://fifa-18.herokuapp.com/countries/Italy
 
 {
     "code": "IT",
@@ -28,7 +28,7 @@ http://localhost:8080/countries/Italy
 
 
 -------------------------------------------
-http://localhost:8080/countries/France
+https://fifa-18.herokuapp.com/countries/France
 {
     "code": "FR",
     "name": "France",
@@ -45,7 +45,7 @@ http://localhost:8080/countries/France
 
 Get all countries by using the following url, result will be retrieved paginated by 10 and sorted Asc.
 Example page=0:
-http://localhost:8080/countries?page=0
+https://fifa-18.herokuapp.com/countries?page=0
 {
     "content": [
         {
