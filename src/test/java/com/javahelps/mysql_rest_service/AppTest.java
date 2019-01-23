@@ -1,47 +1,61 @@
 package com.javahelps.mysql_rest_service;
 
-import org.junit.runner.RunWith;
+import com.javahelps.restservice.controller.CountryController;
+import com.javahelps.restservice.entity.Continents;
+import com.javahelps.restservice.entity.Countries;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.javahelps.restservice.repository.CountryRepository;
-import com.javahelps.restservice.service.CountryService;
+import org.springframework.test.web.servlet.MockMvc;
+import java.util.ArrayList;
+import java.util.List;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import junit.framework.TestCase;
-
-/**
- * Unit test for simple App.
- */
 @RunWith(SpringRunner.class)
-@DataJpaTest
-public class AppTest extends TestCase {
-	
-	
+@SpringBootTest("CountryController")
+@AutoConfigureMockMvc
+public class AppTest {
 	
 	@Autowired
-    private TestRestTemplate restTemplate;
-	@MockBean
-    private CountryRepository countryRepository;
-    @Autowired
-    private CountryService carService;
-
-	
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
-
+    private MockMvc mockMvc;
+    
+    @MockBean
+    private CountryController stockAPI;
+    
     @Test
     public void contextLoads() {
     }
     
-    
+    @Test
+    public void findAll() {
+//    	Continents continent = new Continents("EU", "Europe");
+//        Countries country = new Countries("F", "France", "French Republic", "FRA", "250", continent);
+//        
+//        List<Countries> data = new ArrayList<Countries>();
+//        data.add(country);
+//        //given(stockAPI.listAllCountries(null, "0")).willReturn(ResponseEntity.ok(data));
+//
+//        this.mockMvc.perform(get("/countries?page=0"))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.*", hasSize(data.size())));
+    }
+
+    @Test
+    public void findById() {
+//    	Continents continent = new Continents("EU", "Europe");
+//        Countries country = new Countries("F", "France", "French Republic", "FRA", "250", continent);
+//        //given(stockAPI.search(null, country.getName())).willReturn((ResponseEntity<?>) ResponseEntity.ok());
+//
+//        this.mockMvc.perform(get("/countries/" + "France"))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.name").value(country.getName()));
+    }
 }

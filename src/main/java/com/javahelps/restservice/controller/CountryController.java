@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping(path = "/countries")
-public class CountryController extends MyExceptionHandler{
+public class CountryController{
 
 	@Autowired
 	private CountryService countryService; // Service which will do all data retrieval/manipulation work
@@ -29,7 +29,7 @@ public class CountryController extends MyExceptionHandler{
 
 	// -------------------Retrieve All Countries---------------------------------------------
     @GetMapping
-    public ResponseEntity<?> listAllCountries(WebRequest request, @RequestParam("page")String page){
+    public ResponseEntity<?> listAllCountries(WebRequest request, @RequestParam("page")String page) throws Exception{
     	logger.info("Retrieve 10 Countries start with page: {}", page);
     	try {
     		Integer pageNumber = 0;
@@ -41,18 +41,18 @@ public class CountryController extends MyExceptionHandler{
     		return new ResponseEntity<Page<Countries>>(countries, HttpStatus.OK);
     	}
     	catch(NumberFormatException e) {
-    		return handleAnyException(new Exception("You are trying to convert an invalid String into Integer by passing (page=" + page 
-                    + ")"), HttpStatus.BAD_REQUEST, request);
+    		throw new NumberFormatException("You are trying to convert an invalid String into Integer by passing (page=" + page 
+                    + ")");
     	}
     	catch(IllegalArgumentException e) {
-    		return handleAnyException(new Exception("Wrong passed request param. The URL with param (page=" + page 
-                    + ") is not Integer."), HttpStatus.BAD_REQUEST, request);
+    		throw new IllegalArgumentException("Wrong passed request param. The URL with param (page=" + page 
+                    + ") is not Integer.");
     	}
     	catch(CountryNotFoundException e) {
-    		return handleAnyException(new Exception("No countries found with page = " + page), HttpStatus.NOT_FOUND, request);
+    		throw new CountryNotFoundException("No countries found with page = " + page);
     	}
     	catch(Exception e) {
-    		return handleAnyException(new Exception("Unexpected error."), HttpStatus.INTERNAL_SERVER_ERROR, request);
+    		throw new Exception("Unexpected error.");
     	}
 	}
 
@@ -60,25 +60,25 @@ public class CountryController extends MyExceptionHandler{
 	// -------------------Retrieve Single Country------------------------------------------
 	 
     @GetMapping(path = "/{name}")
-    public ResponseEntity<?> search(WebRequest request, @PathVariable("name") String name) {   
+    public ResponseEntity<?> search(WebRequest request, @PathVariable("name") String name) throws Exception {   
         try {
         	 logger.info("Fetching Country with id {}", name);
              Countries country = countryService.findByName(name);
              if (country == null) {
                  logger.error("Country with name {} not found.", name);
-                 throw new CountryNotFoundException("CountryNotFoundException");               
+                 throw new CountryNotFoundException("Country with name = " + name + " not found");               
              }
     		return new ResponseEntity<Countries>(country, HttpStatus.OK);
     	}
     	catch(IllegalArgumentException e) {
-    		return handleAnyException(new Exception("Wrong passed request param. The URL with param (page=" + name 
-                    + ") is not Integer."), HttpStatus.BAD_REQUEST, request);
+    		throw new IllegalArgumentException("Wrong passed request param. The URL with param (page=" + name 
+                    + ") is not Integer.");
     	}
     	catch(CountryNotFoundException e) {
-    		return handleAnyException(new Exception("Country with name = " + name + " not found"), HttpStatus.NOT_FOUND, request);
+    		throw new CountryNotFoundException("Country with name = " + name + " not found");
     	}
     	catch(Exception e) {
-    		return handleAnyException(new Exception("Unexpected error."), HttpStatus.INTERNAL_SERVER_ERROR, request);
+    		throw new Exception("Unexpected error.");
     	}
     }
 
