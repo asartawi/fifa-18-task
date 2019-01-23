@@ -1,6 +1,16 @@
-# countriesAndContinent
-The Spring project provide rest-api to search for any country and return its continent.
+This is Spring boot project which was implemeted to provide API which read country and return its continent. To implement the following requirments:
 
+API part:
+1- Build API to search for a country and returns its continent. Use this gist for reference: https://gist.github.com/nobuti/3816985, if you have any questions about this please don’t hesitate to ask.
+This API should be able to return a list of countries paginated over 10 results per page. 
+2- Please deploy your API to heroku and provide us with both GIT and heroku link of it. USING CICD is preferred.
+****The API implemented to be used in spark park****
+
+
+RESTFULL API USAGE: 
+
+
+1- The rest-api to search for any country and return its continent.
 
 http://localhost:8080/countries/Italy
 
