@@ -1,5 +1,6 @@
-Spark project uploaded in this directory is run using spark-shell and was implemented
-to answer the following question. 
+Spark project was uploaded to this directory and it was implemented to answer the following Requirements. 
+
+Steps to run the code: 
 
 ----- to run this code ------
 1- install java
@@ -10,6 +11,8 @@ to answer the following question.
 6- results folder of all csv files will be built. 
 7- results were uploaded to was S3.
 ----- end ------
+
+
 
 Requirements:
 
